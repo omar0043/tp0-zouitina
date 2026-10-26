@@ -28,7 +28,17 @@ public class GenerateurReponse implements Serializable { // Serializable car CDI
             // Ajouter le rôle système en majuscule au début du résultat, suivi d'un saut de ligne.
             resultat += roleSysteme.toUpperCase(Locale.FRENCH) + "\n";
             this.roleSystemeAffiche = true;        }
-        resultat += question.toLowerCase(Locale.FRENCH) + "||";
+        // Inverser l'ordre des mots de la question.
+        String[] mots = question.strip().split("\\s+");
+
+        for (int i = mots.length - 1; i >= 0; i--) {
+            resultat += mots[i];
+            if (i > 0) {
+                resultat += " ";
+            }
+        }
+
+        resultat += "||";
         return resultat;
     }
 }
